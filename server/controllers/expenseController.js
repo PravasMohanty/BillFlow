@@ -72,9 +72,18 @@ const updateExpense = async (req, res) => {
       return res.status(404).json({ error: 'Expense not found' })
     }
 
+    // Only allow updating specific fields - prevent userId modification
+    const allowedFields = ['title', 'amount', 'category', 'date', 'paymentMethod', 'notes']
+    const updateData = {}
+    allowedFields.forEach(field => {
+      if (req.body[field] !== undefined) {
+        updateData[field] = req.body[field]
+      }
+    })
+
     const updated = await Expense.findByIdAndUpdate(
       req.params.id,
-      { $set: req.body },
+      { $set: updateData },
       { new: true, runValidators: true }
     )
 

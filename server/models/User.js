@@ -27,9 +27,9 @@ const userSchema = new mongoose.Schema(
       minlength: 6,
     },
     balance: {
-      type: String,
-      default: 'INR',
-    },
+      type: Number,
+      default: 0,
+    }
   },
   { timestamps: true }
 )

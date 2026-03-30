@@ -2,7 +2,7 @@ const bcrypt = require('bcryptjs')
 const User = require('../models/User')
 const generateToken = require('../utils/generateToken')
 
-const Login = async (req, res) => {
+const login = async (req, res) => {
   try {
     const { email, password } = req.body
 
@@ -41,7 +41,7 @@ const Login = async (req, res) => {
   }
 }
 
-const Register = async (req, res) => {
+const register = async (req, res) => {
   try {
     const { name, email, username, password } = req.body
 
@@ -56,13 +56,13 @@ const Register = async (req, res) => {
       return res.status(400).json({ error: 'User already exists' })
     }
 
-    const hashedPass = await bcrypt.hash(password, 12)
+    const hashedPassword = await bcrypt.hash(password, 12)
 
     const newUser = new User({
       name,
       email,
       username,
-      password: hashedPass,
+      password: hashedPassword,
     })
 
     await newUser.save()
@@ -96,6 +96,7 @@ const getUserData = async (req, res) => {
 
     return res.status(200).json({
       success: true,
+      message: 'User data retrieved',
       user,
     })
   } catch (error) {
@@ -104,4 +105,4 @@ const getUserData = async (req, res) => {
   }
 }
 
-module.exports = { Login, Register, getUserData }
+module.exports = { login, register, getUserData }
