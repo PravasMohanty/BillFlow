@@ -1,5 +1,5 @@
 const express = require('express')
-const router = express.Router()
+const expenseRouter = express.Router()
 const {
   getAllExpenses,
   addExpense,
@@ -7,14 +7,15 @@ const {
   deleteExpense,
   getStats,
 } = require('../controllers/expenseController')
-const protect = require('../middleware/auth')
 
-router.use(protect) // all routes below are protected
+const protect = require('../middlewares/auth')
 
-router.get('/stats', getStats)
-router.get('/', getAllExpenses)
-router.post('/', addExpense)
-router.put('/:id', updateExpense)
-router.delete('/:id', deleteExpense)
+expenseRouter.use(protect)
 
-module.exports = router
+expenseRouter.get('/stats', getStats)
+expenseRouter.get('/', getAllExpenses)
+expenseRouter.post('/', addExpense)
+expenseRouter.put('/:id', updateExpense)
+expenseRouter.delete('/:id', deleteExpense)
+
+module.exports = expenseRouter

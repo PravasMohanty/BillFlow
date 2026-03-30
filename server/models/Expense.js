@@ -1,53 +1,47 @@
 const mongoose = require('mongoose')
 
-const subscriptionSchema = new mongoose.Schema(
+const expenseSchema = new mongoose.Schema(
   {
     userId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
       required: true,
     },
-    name: {
+    title: {
       type: String,
-      required: [true, 'Subscription name is required'],
+      required: [true, 'Title is required'],
       trim: true,
     },
     amount: {
       type: Number,
       required: [true, 'Amount is required'],
-      min: 0,
-    },
-    currency: {
-      type: String,
-      default: 'USD',
-    },
-    billingCycle: {
-      type: String,
-      enum: ['monthly', 'yearly', 'weekly'],
-      default: 'monthly',
+      min: [0, 'Amount cannot be negative'],
     },
     category: {
       type: String,
+      required: [true, 'Category is required'],
       enum: [
+        'Food',
+        'Transport',
+        'Shopping',
         'Entertainment',
-        'Music',
-        'Gaming',
-        'Productivity',
+        'Bills',
         'Health',
         'Education',
-        'Cloud',
+        'Travel',
         'Other',
       ],
       default: 'Other',
     },
-    renewalDate: {
+    date: {
       type: Date,
-      required: [true, 'Renewal date is required'],
+      required: [true, 'Date is required'],
+      default: Date.now,
     },
-    status: {
+    paymentMethod: {
       type: String,
-      enum: ['active', 'cancelled', 'paused'],
-      default: 'active',
+      enum: ['Cash', 'Card', 'UPI', 'NetBanking', 'Other'],
+      default: 'Cash',
     },
     notes: {
       type: String,
@@ -57,4 +51,4 @@ const subscriptionSchema = new mongoose.Schema(
   { timestamps: true }
 )
 
-module.exports = mongoose.model('Subscription', subscriptionSchema)
+module.exports = mongoose.model('Expense', expenseSchema)
