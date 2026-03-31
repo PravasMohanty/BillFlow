@@ -1,6 +1,11 @@
-version: '3.8'
-
 services:
+  client:
+    build: ./client
+    ports:
+      - "3000:80"
+    depends_on:
+      - server
+
   server:
     build: ./server
     ports:
@@ -9,9 +14,6 @@ services:
       - ./server/.env
     depends_on:
       - mongo
-    volumes:
-      - ./server:/app
-      - /app/node_modules
 
   mongo:
     image: mongo:8.0

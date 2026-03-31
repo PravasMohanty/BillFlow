@@ -1,0 +1,115 @@
+/* ExpenseCard.css */
+.expense-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #16213e;
+  padding: 1rem;
+  border-radius: 12px;
+  margin-bottom: 0.75rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.expense-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.card-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.category-icon {
+  font-size: 2rem;
+  background: #0f3460;
+  padding: 0.5rem;
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+
+.card-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  min-width: 0;
+}
+
+.card-info h4 {
+  color: white;
+  margin: 0;
+  font-size: 1rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.card-meta {
+  color: #a0a0b0;
+  font-size: 0.8rem;
+}
+
+.card-date {
+  color: #6060a0;
+  font-size: 0.75rem;
+}
+
+.card-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.card-amount {
+  color: #e94560;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.card-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.edit-btn,
+.delete-btn {
+  background: #0f3460;
+  border: none;
+  border-radius: 6px;
+  padding: 0.3rem 0.5rem;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: background 0.2s;
+}
+
+.edit-btn:hover {
+  background: #1a4a80;
+}
+
+.delete-btn:hover {
+  background: #5a1020;
+}
+
+@media (max-width: 480px) {
+  .expense-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .card-right {
+    align-items: flex-start;
+    width: 100%;
+  }
+
+  .card-actions {
+    width: 100%;
+    gap: 0.5rem;
+  }
+}
