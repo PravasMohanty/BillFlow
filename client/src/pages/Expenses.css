@@ -4,10 +4,10 @@
   margin: 2rem auto;
   padding: 1rem;
   width: 100%;
-  height: calc(100vh - 100px);
+  min-height: calc(100vh - 100px);
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  overflow-y: auto;
 }
 
 .expenses-header {
@@ -54,7 +54,6 @@
   background: #16213e;
   border-radius: 0;
   padding: 1.5rem;
-  flex: 1;
   overflow-y: auto;
   padding-right: 1rem;
 }
