@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: server
+  template:
+    metadata:
+      labels:
+        app: server
+    spec:
+      containers:
+        - name: server
+          image: dotmaximus/billflow-server:latest
+          ports:
+            - containerPort: 5000
+          env:
+            - name: MONGO_URI
+              value: mongodb://admin:password@mongo:27017/billflow?authSource=admin
+            - name: PORT
+              value: "5000"
+            - name: JWT_SECRET
+              value: MeawwGhopGhop
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: server
+spec:
+  selector:
+    app: server
+  type: NodePort
+  ports:
+    - port: 5000
+      targetPort: 5000
+      nodePort: 30500
